@@ -28,6 +28,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.jennifer.R;
+import com.jennifer.connection.ServerConnection;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -197,7 +202,7 @@ public class LoginController extends AppCompatActivity implements LoaderCallback
 
     private boolean isPasswordValid(String password) {
         //TODO: Replace this with your own logic
-        return password.length() > 4;
+        return password.length() > 3;
     }
 
     /**
@@ -296,6 +301,8 @@ public class LoginController extends AppCompatActivity implements LoaderCallback
      */
     public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
 
+        private final String URL = "http://excellentprogrammers.esy.es/Script/Login/Login.php";
+        private final String SUCCESS = "success";
         private final String mEmail;
         private final String mPassword;
 
@@ -307,22 +314,21 @@ public class LoginController extends AppCompatActivity implements LoaderCallback
         @Override
         protected Boolean doInBackground(Void... params) {
             // TODO: attempt authentication against a network service.
+            StringBuilder urlParams = new StringBuilder();
+            JSONArray jsonArray;
+            ServerConnection serverConnection = new ServerConnection();
+            JSONObject json = null;
 
+            urlParams.append("email").append("=").append(mEmail)
+                    .append("&").append("password").append("=").append(mPassword);
             try {
-                // Simulate network access.
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                return false;
-            }
-
-            for (String credential : DUMMY_CREDENTIALS) {
-                String[] pieces = credential.split(":");
-                if (pieces[0].equals(mEmail)) {
-                    // Account exists, return true if the password matches.
-                    return pieces[1].equals(mPassword);
+                json = serverConnection.makeHttpRequestPost(URL, urlParams.toString());
+                if(json.getBoolean(SUCCESS) != true) {
+                    return false;
                 }
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
-
             // TODO: register the new account here.
             return true;
         }
