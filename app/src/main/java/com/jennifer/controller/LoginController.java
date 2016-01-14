@@ -315,7 +315,6 @@ public class LoginController extends AppCompatActivity implements LoaderCallback
         protected Boolean doInBackground(Void... params) {
             // TODO: attempt authentication against a network service.
             StringBuilder urlParams = new StringBuilder();
-            JSONArray jsonArray;
             ServerConnection serverConnection = new ServerConnection();
             JSONObject json = null;
 
