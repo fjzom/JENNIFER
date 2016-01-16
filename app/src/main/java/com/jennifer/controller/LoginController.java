@@ -312,8 +312,8 @@ public class LoginController extends AppCompatActivity implements LoaderCallback
             JSONObject json = null;
             Boolean succes = false;
 
-            urlParams.append("email").append("=").append(mEmail)
-                    .append("&").append("password").append("=").append(mPassword);
+            urlParams.append("Login").append("=").append(mEmail)
+                    .append("&").append("Password").append("=").append(mPassword);
             try {
                 json = serverConnection.makeHttpRequestPost(URL, urlParams.toString());
                 succes = json.getBoolean(SUCCESS);
