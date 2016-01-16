@@ -4,7 +4,9 @@ import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.NavigationView.OnNavigationItemSelectedListener;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -15,6 +17,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 
 import com.jennifer.R;
+import com.jennifer.adapter.DesignDemoPagerAdapter;
 
 public class MainActivity extends AppCompatActivity
         implements OnNavigationItemSelectedListener, OnClickListener {
@@ -34,6 +37,12 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        DesignDemoPagerAdapter adapter = new DesignDemoPagerAdapter(getSupportFragmentManager());
+        ViewPager viewPager = (ViewPager)findViewById(R.id.viewpager);
+        viewPager.setAdapter(adapter);
+        TabLayout tabLayout = (TabLayout)findViewById(R.id.tablayout);
+        tabLayout.setupWithViewPager(viewPager);
     }
 
     @Override
