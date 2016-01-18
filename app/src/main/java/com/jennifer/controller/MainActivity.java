@@ -17,7 +17,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 
 import com.jennifer.R;
-import com.jennifer.adapter.DesignDemoPagerAdapter;
+import com.jennifer.adapter.PagerAdapter;
 
 public class MainActivity extends AppCompatActivity
         implements OnNavigationItemSelectedListener, OnClickListener {
@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        DesignDemoPagerAdapter adapter = new DesignDemoPagerAdapter(getSupportFragmentManager());
+        PagerAdapter adapter = new PagerAdapter(getSupportFragmentManager());
         ViewPager viewPager = (ViewPager)findViewById(R.id.viewpager);
         viewPager.setAdapter(adapter);
         TabLayout tabLayout = (TabLayout)findViewById(R.id.tablayout);

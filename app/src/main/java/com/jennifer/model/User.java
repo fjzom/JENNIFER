@@ -6,19 +6,26 @@ import org.json.JSONObject;
 /**
  * Created by Alex on 14/01/2016.
  */
-public class Login {
+public class User {
 
     private final String EMAIL = "email";
     private final String PASSWORD = "password";
     private String email;
     private String password;
+    private String description;
 
-    public Login(String email, String password) {
+    public User(String email, String password, String description) {
         this.email = email;
         this.password = password;
+        this.description = description;
     }
 
-    public Login(JSONObject json) {
+    public User(String email, String description) {
+        this.email = email;
+        this.description = description;
+    }
+
+    public User(JSONObject json) {
         try {
             this.email = json.getString(EMAIL);
             this.password = json.getString(PASSWORD);
@@ -41,5 +48,13 @@ public class Login {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

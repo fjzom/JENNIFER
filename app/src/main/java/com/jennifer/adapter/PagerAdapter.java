@@ -1,23 +1,22 @@
 package com.jennifer.adapter;
 
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.jennifer.fragment.DesignDemoFragment;
+import com.jennifer.fragment.Fragment;
 
 /**
  * Created by Alex on 15/01/2016.
  */
-public class DesignDemoPagerAdapter extends FragmentStatePagerAdapter {
+public class PagerAdapter extends FragmentStatePagerAdapter {
 
-    public DesignDemoPagerAdapter(FragmentManager fm) {
+    public PagerAdapter(FragmentManager fm) {
         super(fm);
     }
 
     @Override
-    public Fragment getItem(int position) {
-        return DesignDemoFragment.newInstance(position);
+    public android.support.v4.app.Fragment getItem(int position) {
+        return Fragment.newInstance(position);
     }
 
     @Override
@@ -27,6 +26,6 @@ public class DesignDemoPagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public CharSequence getPageTitle(int position) {
-        return "Tab " + position;
+        return "Tab " + (position + 1);
     }
 }

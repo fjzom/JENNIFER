@@ -2,7 +2,6 @@ package com.jennifer.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,22 +9,23 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.jennifer.R;
-import com.jennifer.adapter.DesignDemoRecyclerAdapter;
+import com.jennifer.adapter.RecyclerAdapter;
+import com.jennifer.model.User;
 
 import java.util.ArrayList;
 
 /**
  * Created by Alex on 15/01/2016.
  */
-public class DesignDemoFragment extends Fragment {
+public class Fragment extends android.support.v4.app.Fragment {
     private static final String TAB_POSITION = "tab_position";
 
-    public DesignDemoFragment() {
+    public Fragment() {
 
     }
 
-    public static DesignDemoFragment newInstance(int tabPosition) {
-        DesignDemoFragment fragment = new DesignDemoFragment();
+    public static Fragment newInstance(int tabPosition) {
+        Fragment fragment = new Fragment();
         Bundle args = new Bundle();
         args.putInt(TAB_POSITION, tabPosition);
         fragment.setArguments(args);
@@ -36,17 +36,22 @@ public class DesignDemoFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Bundle args = getArguments();
-        int tabPosition = args.getInt(TAB_POSITION);
+        int tabPosition = args.getInt(TAB_POSITION) + 1;
 
-        ArrayList<String> items = new ArrayList<String>();
+        ArrayList<User> items = new ArrayList<User>();
         for (int i = 0; i < 50; i++) {
-            items.add("Tab #" + tabPosition + " item #" + i);
+            items.add(new User("User " + (i + 1) + " - Tab " + tabPosition,
+                    getString(R.string.second_activity_text)));
         }
 
         View v =  inflater.inflate(R.layout.fragment_list_view, container, false);
         RecyclerView recyclerView = (RecyclerView)v.findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.setAdapter(new DesignDemoRecyclerAdapter(items));
+        recyclerView.setAdapter(new RecyclerAdapter(items));
+
+        // use this setting to improve performance if you know that changes
+        // in content do not change the layout size of the RecyclerView
+//        recyclerView.setHasFixedSize(true);
 
         return v;
     }
