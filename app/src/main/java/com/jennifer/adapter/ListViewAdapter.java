@@ -1,4 +1,4 @@
-package com.jennifer.controller;
+package com.jennifer.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;

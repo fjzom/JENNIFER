@@ -7,10 +7,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.jennifer.R;
 import com.jennifer.controller.SecondActivity;
+import com.jennifer.model.Ranking;
 import com.jennifer.model.User;
 
 import java.util.List;
@@ -20,9 +22,9 @@ import java.util.List;
  */
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
 
-    private List<User> mItems;
+    private List<Ranking> mItems;
 
-    public RecyclerAdapter(List<User> items) {
+    public RecyclerAdapter(List<Ranking> items) {
         mItems = items;
     }
 
@@ -35,14 +37,15 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int i) {
-        User item = mItems.get(i);
+        Ranking item = mItems.get(i);
 
         // Data Set
-        viewHolder.mTextView.setText(item.getEmail());
-        viewHolder.mDescView.setText(item.getDescription());
+        viewHolder.mImage.setImageResource(item.getImagen());
+        viewHolder.mTitle.setText(item.getTitulo());
 
 
-        viewHolder.mTextView.setOnClickListener(new View.OnClickListener() {
+
+        viewHolder.mImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Context context = view.getContext();
@@ -58,15 +61,13 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        private final TextView mTextView;
-        private final TextView mDescView;
-        private final CardView cv;
+        private final ImageView mImage;
+        private final TextView mTitle;
 
         ViewHolder(View v) {
             super(v);
-            cv = (CardView)itemView.findViewById(R.id.cv);
-            mTextView = (TextView)v.findViewById(R.id.email_item);
-            mDescView = (TextView)v.findViewById(R.id.description_item);
+            mImage = (ImageView)v.findViewById(R.id.list_row_image);
+            mTitle = (TextView)v.findViewById(R.id.list_row_title);
         }
     }
 

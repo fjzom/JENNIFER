@@ -10,26 +10,26 @@ import android.view.ViewGroup;
 
 import com.jennifer.R;
 import com.jennifer.adapter.RecyclerAdapter;
-import com.jennifer.model.User;
+import com.jennifer.model.Ranking;
 
 import java.util.ArrayList;
 
 /**
  * Created by Alex on 15/01/2016.
  */
-public class Fragment extends android.support.v4.app.Fragment {
+public class TabFragment extends android.support.v4.app.Fragment {
     private static final String TAB_POSITION = "tab_position";
 
-    public Fragment() {
+    public TabFragment() {
 
     }
 
-    public static Fragment newInstance(int tabPosition) {
-        Fragment fragment = new Fragment();
+    public static TabFragment newInstance(int tabPosition) {
+        TabFragment tabFragment = new TabFragment();
         Bundle args = new Bundle();
         args.putInt(TAB_POSITION, tabPosition);
-        fragment.setArguments(args);
-        return fragment;
+        tabFragment.setArguments(args);
+        return tabFragment;
     }
 
     @Nullable
@@ -38,10 +38,9 @@ public class Fragment extends android.support.v4.app.Fragment {
         Bundle args = getArguments();
         int tabPosition = args.getInt(TAB_POSITION) + 1;
 
-        ArrayList<User> items = new ArrayList<User>();
+        ArrayList<Ranking> items = new ArrayList<Ranking>();
         for (int i = 0; i < 50; i++) {
-            items.add(new User("User " + (i + 1) + " - Tab " + tabPosition,
-                    getString(R.string.second_activity_text)));
+            items.add(new Ranking("titulo " + (i + 1), R.mipmap.ic_launcher));
         }
 
         View v =  inflater.inflate(R.layout.fragment_list_view, container, false);
@@ -51,7 +50,7 @@ public class Fragment extends android.support.v4.app.Fragment {
 
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
-//        recyclerView.setHasFixedSize(true);
+        recyclerView.setHasFixedSize(true);
 
         return v;
     }
