@@ -37,12 +37,17 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         User item = mItems.get(i);
 
         // Data Set
-        viewHolder.mImage.setImageResource(item.getImagen());
-//        viewHolder.mTitle.setText(item.getTitulo());
+        viewHolder.logImage.setImageResource(item.getImagen());
 
+        viewHolder.doneBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Context context = view.getContext();
+                context.startActivity(new Intent(context, SecondActivity.class));
+            }
+        });
 
-
-        viewHolder.mImage.setOnClickListener(new View.OnClickListener() {
+        viewHolder.cancelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Context context = view.getContext();
@@ -58,13 +63,15 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        private final ImageView mImage;
-//        private final TextView mTitle;
+        private final ImageView logImage;
+        private final ImageView doneBtn;
+        private final ImageView cancelBtn;
 
         ViewHolder(View v) {
             super(v);
-            mImage = (ImageView)v.findViewById(R.id.list_row_image);
-//            mTitle = (TextView)v.findViewById(R.id.list_row_title);
+            logImage = (ImageView)v.findViewById(R.id.log_image);
+            doneBtn = (ImageView)v.findViewById(R.id.done);
+            cancelBtn = (ImageView)v.findViewById(R.id.cancel);
         }
     }
 
