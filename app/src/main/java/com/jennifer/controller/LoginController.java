@@ -9,6 +9,8 @@ import android.content.Intent;
 import android.content.Loader;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -189,13 +191,18 @@ public class LoginController extends AppCompatActivity implements LoaderCallback
     }
 
     private boolean isEmailValid(String email) {
-        //TODO: Replace this with your own logic
         return email.contains("@");
     }
 
     private boolean isPasswordValid(String password) {
-        //TODO: Replace this with your own logic
         return password.length() > 3;
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(getApplicationContext().CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
     /**
@@ -306,22 +313,25 @@ public class LoginController extends AppCompatActivity implements LoaderCallback
 
         @Override
         protected Boolean doInBackground(Void... params) {
-            // TODO: attempt authentication against a network service.
-            StringBuilder urlParams = new StringBuilder();
-            ServerConnection serverConnection = new ServerConnection();
-            JSONObject json = null;
+
             Boolean succes = false;
 
-            urlParams.append("Login").append("=").append(mEmail)
-                    .append("&").append("Password").append("=").append(mPassword);
-            try {
-                json = serverConnection.makeHttpRequestPost(URL, urlParams.toString());
-                succes = json.getBoolean(SUCCESS);
-            } catch (JSONException e) {
-                e.printStackTrace();
+            if (isNetworkAvailable()) {
+                StringBuilder urlParams = new StringBuilder();
+                ServerConnection serverConnection = new ServerConnection();
+                JSONObject json = null;
+
+                urlParams.append("Login").append("=").append(mEmail)
+                        .append("&").append("Password").append("=").append(mPassword);
+                try {
+                    json = serverConnection.makeHttpRequestPost(URL, urlParams.toString());
+                    succes = json.getBoolean(SUCCESS);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
-            // TODO: register the new account here.
-            return succes;
+            return true;
+//            return succes;
         }
 
         @Override
