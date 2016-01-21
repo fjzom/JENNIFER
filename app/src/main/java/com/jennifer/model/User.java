@@ -13,25 +13,28 @@ public class User {
     private String email;
     private String password;
     private String description;
+    private int imagen;
 
-    public User(String email, String password, String description) {
-        this.email = email;
-        this.password = password;
-        this.description = description;
-    }
-
-    public User(String email, String description) {
-        this.email = email;
-        this.description = description;
+    public User(String description, int imagen) {
+        this.setDescription(description);
+        this.setImagen(imagen);
     }
 
     public User(JSONObject json) {
         try {
-            this.email = json.getString(EMAIL);
-            this.password = json.getString(PASSWORD);
+            this.setEmail(json.getString(getEMAIL()));
+            this.setPassword(json.getString(getPASSWORD()));
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    public String getEMAIL() {
+        return EMAIL;
+    }
+
+    public String getPASSWORD() {
+        return PASSWORD;
     }
 
     public String getEmail() {
@@ -56,5 +59,13 @@ public class User {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public int getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(int imagen) {
+        this.imagen = imagen;
     }
 }

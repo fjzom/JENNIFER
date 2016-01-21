@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 
 import com.jennifer.R;
 import com.jennifer.adapter.RecyclerAdapter;
-import com.jennifer.model.Ranking;
+import com.jennifer.model.User;
 
 import java.util.ArrayList;
 
@@ -38,9 +38,9 @@ public class TabFragment extends android.support.v4.app.Fragment {
         Bundle args = getArguments();
         int tabPosition = args.getInt(TAB_POSITION) + 1;
 
-        ArrayList<Ranking> items = new ArrayList<Ranking>();
+        ArrayList<User> items = new ArrayList<User>();
         for (int i = 0; i < 50; i++) {
-            items.add(new Ranking("titulo " + (i + 1), R.mipmap.ic_launcher));
+            items.add(new User("titulo " + (i + 1), R.mipmap.ic_launcher));
         }
 
         View v =  inflater.inflate(R.layout.fragment_list_view, container, false);
