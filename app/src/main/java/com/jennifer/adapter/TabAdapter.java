@@ -10,6 +10,8 @@ import com.jennifer.fragment.TabFragment;
  */
 public class TabAdapter extends FragmentStatePagerAdapter {
 
+    private String [] TAB_NAME = {"PRIVADAS", "PUBLICAS", "INVITACIONES"};
+
     public TabAdapter(FragmentManager fm) {
         super(fm);
     }
@@ -26,6 +28,6 @@ public class TabAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public CharSequence getPageTitle(int position) {
-        return "Tab " + (position + 1);
+        return TAB_NAME[position];
     }
 }

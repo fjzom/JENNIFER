@@ -41,7 +41,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
         // Data Set
         viewHolder.mImage.setImageResource(item.getImagen());
-        viewHolder.mTitle.setText(item.getTitulo());
+//        viewHolder.mTitle.setText(item.getTitulo());
 
 
 
@@ -62,12 +62,12 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         private final ImageView mImage;
-        private final TextView mTitle;
+//        private final TextView mTitle;
 
         ViewHolder(View v) {
             super(v);
             mImage = (ImageView)v.findViewById(R.id.list_row_image);
-            mTitle = (TextView)v.findViewById(R.id.list_row_title);
+//            mTitle = (TextView)v.findViewById(R.id.list_row_title);
         }
     }
 
