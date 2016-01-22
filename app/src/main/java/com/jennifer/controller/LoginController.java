@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.CursorLoader;
+import android.content.Intent;
 import android.content.Loader;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -30,7 +31,6 @@ import android.widget.TextView;
 import com.jennifer.R;
 import com.jennifer.connection.ServerConnection;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -49,13 +49,6 @@ public class LoginController extends AppCompatActivity implements LoaderCallback
      */
     private static final int REQUEST_READ_CONTACTS = 0;
 
-    /**
-     * A dummy authentication store containing known user names and passwords.
-     * TODO: remove after connecting to a real authentication system.
-     */
-    private static final String[] DUMMY_CREDENTIALS = new String[]{
-            "foo@example.com:hello", "bar@example.com:world"
-    };
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */
@@ -317,19 +310,18 @@ public class LoginController extends AppCompatActivity implements LoaderCallback
             StringBuilder urlParams = new StringBuilder();
             ServerConnection serverConnection = new ServerConnection();
             JSONObject json = null;
+            Boolean succes = false;
 
-            urlParams.append("email").append("=").append(mEmail)
-                    .append("&").append("password").append("=").append(mPassword);
+            urlParams.append("Login").append("=").append(mEmail)
+                    .append("&").append("Password").append("=").append(mPassword);
             try {
                 json = serverConnection.makeHttpRequestPost(URL, urlParams.toString());
-                if(json.getBoolean(SUCCESS) != true) {
-                    return false;
-                }
+                succes = json.getBoolean(SUCCESS);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
             // TODO: register the new account here.
-            return true;
+            return succes;
         }
 
         @Override
@@ -339,6 +331,8 @@ public class LoginController extends AppCompatActivity implements LoaderCallback
 
             if (success) {
                 finish();
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();
