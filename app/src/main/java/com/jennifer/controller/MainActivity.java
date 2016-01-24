@@ -20,7 +20,7 @@ import com.jennifer.R;
 import com.jennifer.adapter.TabAdapter;
 
 public class MainActivity extends AppCompatActivity
-        implements OnNavigationItemSelectedListener, OnClickListener {
+        implements OnNavigationItemSelectedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,9 +102,4 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    @Override
-    public void onClick(View view) {
-        Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show();
-    }
 }

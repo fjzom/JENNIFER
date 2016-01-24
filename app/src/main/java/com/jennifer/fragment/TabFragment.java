@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 
 import com.jennifer.R;
 import com.jennifer.adapter.RecyclerAdapter;
-import com.jennifer.model.Ranking;
+import com.jennifer.model.User;
 
 import java.util.ArrayList;
 
@@ -37,20 +37,31 @@ public class TabFragment extends android.support.v4.app.Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Bundle args = getArguments();
         int tabPosition = args.getInt(TAB_POSITION) + 1;
+        View v = null;
 
-        ArrayList<Ranking> items = new ArrayList<Ranking>();
-        for (int i = 0; i < 50; i++) {
-            items.add(new Ranking("titulo " + (i + 1), R.mipmap.ic_launcher));
+        switch (tabPosition) {
+            case 1:
+                ArrayList<User> items = new ArrayList<User>();
+                for (int i = 0; i < 50; i++) {
+                    items.add(new User("titulo " + (i + 1), R.mipmap.ic_launcher));
+                }
+
+                v = inflater.inflate(R.layout.fragment_list_view, container, false);
+                RecyclerView recyclerView = (RecyclerView) v.findViewById(R.id.recyclerview);
+                recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                recyclerView.setAdapter(new RecyclerAdapter(items));
+
+                // use this setting to improve performance if you know that changes
+                // in content do not change the layout size of the RecyclerView
+                recyclerView.setHasFixedSize(true);
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            default:
+                break;
         }
-
-        View v =  inflater.inflate(R.layout.fragment_list_view, container, false);
-        RecyclerView recyclerView = (RecyclerView)v.findViewById(R.id.recyclerview);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.setAdapter(new RecyclerAdapter(items));
-
-        // use this setting to improve performance if you know that changes
-        // in content do not change the layout size of the RecyclerView
-        recyclerView.setHasFixedSize(true);
 
         return v;
     }
