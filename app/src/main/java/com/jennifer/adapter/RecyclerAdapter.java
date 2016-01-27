@@ -24,11 +24,11 @@ import java.util.List;
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
 
     private List<User> mItems;
-    private PopupWindow popUpWindow;
-    private LayoutInflater layoutInflater;
     public RecyclerAdapter(List<User> items) {
         mItems = items;
     }
+    private PopupWindow popUpWindow;
+    private LayoutInflater layoutInflater;
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
@@ -60,6 +60,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
             }
         });
 
+
+
         viewHolder.cv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -71,6 +73,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
                 ViewGroup container = (ViewGroup)layoutInflater.inflate(R.layout.popup_info_apuestas,null);
                 popUpWindow = new PopupWindow(container,1000,750,true);
                 popUpWindow.showAtLocation(view, Gravity.NO_GRAVITY,500,500);
+
 
                 container.setOnTouchListener(new View.OnTouchListener() {
                     @Override
@@ -89,6 +92,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
+
 
         private final ImageView logImage;
         private final ImageView doneBtn;
